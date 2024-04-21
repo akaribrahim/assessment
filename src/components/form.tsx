@@ -32,12 +32,15 @@ const Form = ({ onSubmit, selectedForm, setSelectedForm }: FormProps) => {
       defaultValues: { code: '', name: '', assignDate: '', isUpdatable: true },
    });
    useEffect(() => {
+      // form submit edildiğinde sıfırlanır.
       if (isSubmitSuccessful) {
          reset();
       }
    }, [isSubmitSuccessful, reset]);
    useEffect(() => {
       if (selectedForm) {
+         // tabledan bir entry seçildiğinde form seçilen bilgilerle doldurulur.
+         // keepDefaultValues parametresi ile default değerlerin değişmesi engellenir.
          reset(selectedForm, { keepDefaultValues: true });
       }
    }, [selectedForm, reset]);

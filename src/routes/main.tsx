@@ -31,6 +31,9 @@ const Main = () => {
    const [selectedRow, setSelectedRow] = useState<FormInputs | null>(null);
 
    const handleSubmitForm = (data: FormInputs): void => {
+      // assignDate DatePicker componentinden date objesi olarak geliyor.
+      // Edit işleminde date değişmezse kaydedildiği şekilde string olarak gelir.
+      // Bu yüzden assignDate string geldiğinde herhangi bir format işlemi uygulanmaz.
       const submitPayload = {
          ...data,
          assignDate:
@@ -47,9 +50,9 @@ const Main = () => {
    const generateRandomData = (): void => {
       const generated: FormInputs[] = Array.from({ length: 8 }, () => ({
          id: uuid(),
-         code: new RandExp(/^[A-Za-z]{2}[0-9]{3}$/).gen(),
-         name: new RandExp(/^[A-Za-z]{4}[0-9]{3}[a-z]{3}$/).gen(),
-         assignDate: new RandExp(/^(0[1-9]|[12][0-9]|3[0])\/04\/2024$/).gen(),
+         code: new RandExp(/^[A-Za-z]{2}[0-9]{3}$/).gen(), // ilk 2 karakter harf sonraki 3 karakter sayı
+         name: new RandExp(/^[A-Za-z]{4}[0-9]{3}[a-z]{3}$/).gen(), // ilk 4 karakter büyük/küçük harf, sonraki 3 karakter sayı, sonraki 3 karakter küçük harf
+         assignDate: new RandExp(/^(0[1-9]|[12][0-9]|3[0])\/04\/2024$/).gen(), // 04.2024 başına gelen gün: 0 ile 1-9 arası bir sayı || 1,2 ile herhangi bir rakam || 3 ile 0
          isUpdatable: Math.random() >= 0.25,
       }));
       dispatch(bulkUpdate(generated));
