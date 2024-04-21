@@ -33,7 +33,10 @@ const Main = () => {
    const handleSubmitForm = (data: FormInputs): void => {
       const submitPayload = {
          ...data,
-         assignDate: dayjs(data.assignDate).format('DD/MM/YYYY'),
+         assignDate:
+            typeof data.assignDate !== 'string'
+               ? dayjs(data.assignDate).format('DD/MM/YYYY')
+               : data.assignDate,
       };
       if (submitPayload.id) {
          setSelectedRow(null);
