@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+label {
+  &.required {
+    position: relative;
+    &::after {
+      content: ' *';
+      color: black;
+    }
+  }
+} 
