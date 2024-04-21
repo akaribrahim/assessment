@@ -78,6 +78,7 @@ const Main = () => {
                         <Button
                            key="generateData"
                            type="button"
+                           isDisabled={data.length > 200}
                            label="Generate Random Data"
                            classNames="text-sky-600"
                            onClick={generateRandomData}
